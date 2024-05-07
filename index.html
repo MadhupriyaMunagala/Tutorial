@@ -13,6 +13,83 @@
   <meta name="author" content="" />
 
   <title>Sai Tutorial</title>
+  <style>
+    .notification-container {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        display: none;
+    }
+    
+    .notification-container.show {
+        display: block;
+    }
+    
+    .notification-content {
+        display: flex;
+        align-items: center;
+    }
+    
+    .notification-message {
+        flex-grow: 1;
+    }
+    
+    .notification-cancel {
+        cursor: pointer;
+    }
+
+     /* Style for the container */
+     #promotion-container {
+        width: 100%;
+        height: 200px; /* Adjust height as needed */
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* Style for individual promotions */
+    .promotion {
+        position:absolute;
+        bottom: 0;
+        left: 100%; /* Initially hides the promotion outside the container */
+        width: 100%;
+        min-width: 350px;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f2f2f2;
+        transition: left 0.9s ease-in-out;
+    }
+
+    /* Style for the image */
+    .promotion img {
+        max-width: 50%;
+        height: auto;
+    }
+
+    /* Style for the text information */
+    .promotion .text {
+        max-width: 50%;
+        padding: 10px;
+        padding-left: 85px;
+    }
+
+    /* Animation to slide the promotions */
+    .move {
+        left: 0;
+    }
+    .imgsize{
+        
+        min-width: 80px;
+        min-height:60px ;
+
+    }
+  </style>
 
 
 
@@ -332,10 +409,100 @@
 
   <!-- end landing section -->
 
+  <div class="notification-container" id="notification">
+    <div class="notification-content">
+        <div class="notification-message">    </div>
+        <div class="notification-cancel" onclick="cancelAd()"> addtheadd.com ads Click hear Don't Miss The Offers</div>
+    </div>
+</div>
 
+<script>
+let notifications = document.getElementById('notification');
+let ads = ['https://bvscarpenters.netlify.app',  'https://addtheadd.com','https://bvsadd.netlify.app','https://bvswatchshop.netlify.app']; // Deep link URLs of ads
+let currentIndex = 0;
+
+function displayAd() {
+    notifications.classList.add('show');
+    setTimeout(hideAd, 10000); // Hide ad after 10 seconds
+}
+
+function hideAd() {
+    notifications.classList.remove('show');
+    currentIndex = (currentIndex + 1) % ads.length;
+    setTimeout(displayAd, 10000); // Display next ad after 10 second
+}
+
+function cancelAd() {
+    window.location.href = ads[currentIndex];
+}
+
+displayAd(); // Start displaying ads
+</script>
 
 
   
+
+<div id="promotion-container">
+    
+  <a href="https://addtheadd.com"> <div class="promotion">
+      <p> Ads </p>
+      <div class="image">
+          <img class="imgsize" src="images/add3.jpeg" alt="Promotion 1">
+      </div>
+      <div class="text">
+          
+          <p>addtheadd.com website information</p>
+      </div>
+  </div></a>
+
+  <a href="https://bvsadd.netlify.app"><div class="promotion">
+      <p> Ads </p>
+      <div class="image">
+          <img class="imgsize" src="images/addtheadd2.jpeg" alt="Promotion 2">
+      </div>
+      <div class="text">
+          <p>Business Victory Solutions information</p>
+      </div>
+  </div></a>
+ 
+  <a href="https://book-shop-book.netlify.app"><div class="promotion">
+      <p> Ads </p>
+      <div class="image">
+          <img class="imgsize" src="images/B1.jpg" style="width: 50%;height: 50px;" alt="Promotion 3">
+      </div>
+      <div class="text">
+          <p>BOOKSHOP </p>
+      </div>
+  </div></a>
+
+  <a href="https://bvsadd.netlify.app"><div class="promotion">
+      <p> Ads </p>
+      <div class="image">
+          <img class="imgsize" src="images/bg1.jpeg" alt="Promotion 4">
+      </div>
+      <div class="text">
+          <p>Promotion 2 Text Information</p>
+      </div>
+  </div></a>
+</div>
+
+<script>
+  // JavaScript to rotate promotions every 5 seconds
+  document.addEventListener('DOMContentLoaded', function () {
+      var promotions = document.querySelectorAll('.promotion');
+      var index = 0;
+
+      function rotatePromotion() {
+          promotions[index].classList.remove('move');
+          index = (index + 1) % promotions.length;
+          promotions[index].classList.add('move');
+      }
+
+      rotatePromotion(); // Initially display the first promotion
+
+      setInterval(rotatePromotion, 10000); // Rotate promotion every 5 seconds
+  });
+</script>
 
   <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
